@@ -1,3 +1,6 @@
+#ifndef _RPI_H
+#define _RPI_H
+
 #include <stdio.h>
 
 #include <sys/mman.h>
@@ -18,7 +21,7 @@
 
 #ifdef RPI2
 #define BCM2708_PERI_BASE       0x3F000000
-#define GPIO_BASE               (BCM2708_PERI_BASE + 0x200000)  // GPIO controller. Maybe wrong. Need to be tested.
+#define GPIO_BASE               (BCM2708_PERI_BASE + 0x200000)  // GPIO controller
 #define BSC0_BASE               (BCM2708_PERI_BASE + 0x804000)  // I2C controller
 #endif
 
@@ -43,4 +46,6 @@ struct bcm2835_peripheral {
 
 extern struct bcm2835_peripheral gpio;
 extern int map_peripheral(struct bcm2835_peripheral *);
+extern void unmap_peripheral(struct bcm2835_peripheral *);
 
+#endif
