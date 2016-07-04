@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 import time
+import sys
 from RF24 import *
 import RPi.GPIO as GPIO
 import dweepy
@@ -40,6 +41,10 @@ radio.startListening()
 
 # forever loop
 while 1:
-    try_read_data()
-    time.sleep(15)
+    try:
+        try_read_data()
+    except:
+        e = sys.exc_info()[0]
+        print(e)
+    time.sleep(60)
 
