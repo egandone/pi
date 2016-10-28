@@ -29,7 +29,7 @@ class CarriotsMqttClient():
         try:
             publish.single(topic=self.topic, payload=msg, hostname=self.host, auth=self.auth, port=self.port)
         except Exception, ex:
-            print ex
+            print(ex)
 
 def try_read_data(carriots_client):
     if radio.available():
@@ -40,9 +40,9 @@ def try_read_data(carriots_client):
         dweet = {'temp1': float(values[0].decode()), 'temp2': float(values[1].decode()), 'pressure': float(values[2].decode()), 'humidity': float(values[3].decode())}
         print(dweet)
         dweepy.dweet_for(thing_name, dweet)
-		msg_dict = {'protocol': 'v2', 'device': 'defaultDevice@egandone.egandone', 'at': 'now'}
-		msg_dict['data'] = dweet
-		carriots_client.publish(dumps(msg_dict))
+	msg_dict = {'protocol': 'v2', 'device': 'defaultDevice@egandone.egandone', 'at': 'now'}
+	msg_dict['data'] = dweet
+	carriots_client.publish(dumps(msg_dict))
             
 
 pipes = [0xF0F0F0F0E1, 0xF0F0F0F0D2]
