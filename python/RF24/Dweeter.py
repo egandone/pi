@@ -1,7 +1,6 @@
 import dweepy
 
 class Dweeter:
-
 	_thing_name = None
 	
 	def __init__(self):

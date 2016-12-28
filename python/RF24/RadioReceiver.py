@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
-#import time
-#import sys
 from RF24 import *
 import RPi.GPIO as GPIO
-
-#irq_gpio_pin = None
 
 class RadioReceiver:
 	_radio = None

@@ -1,31 +1,39 @@
 #!/usr/bin/env python3
 
 import time
-import sys
-from RF24 import *
-import RPi.GPIO as GPIO
-import dweepy
 
 from RadioReceiver import RadioReceiver
 from Dweeter import Dweeter
 from CarriotsMqttClient import CarriotsMqttClient
 
-#irq_gpio_pin = None
-
 print('Running ...')
 
+# Create a receiver to get the data from the arduino
 receiver = RadioReceiver()
 
+# To send data to dweet.io
 dweeter = Dweeter()
 
+# To send data to carriots.com
 auth = {'username': '8d2818491e3c69fbd65138abe3da9c2b39e232de3a38bf261f99549de2178c3d', 'password': ''}
 client_mqtt = CarriotsMqttClient(auth)
 
+# All initialized
 print('... awaiting transmission')
 
+# Start up the radio receiver
 receiver.start();
 
-# forever loop
+# Loop forever reading data from the radio and then publishing it
+#    There is a 60 seconds wait between each iteration 
+#    assuming the radio is returning data.  This keeps us from
+#    flooding the IoT services and exceeding my "free" account
+#    limit(s)
+#
+#    If no data it received from then it waits only 2 seconds and 
+#    tries again.  This speeds up startup since it takes a second
+#    or two for the radio receiver to initialize
+#
 while 1:
 	try:
 		climate_data = receiver.read_data()
