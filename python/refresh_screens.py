@@ -35,7 +35,7 @@ def check_files(path, remote_dir):
 	global found_images
 	try:
 		if (internet_on()):
-			session = ftplib.FTP('ftp.stgeorgestoronto.ca', 'screens@stgeorgestoronto.ca', 'QvV3blUgAll8uwrbUifA')
+			session = ftplib.FTP('ftp.stgeorgestoronto.ca', 'screens@stgeorgestoronto.ca', 'qVV3blUgAll8uwrbUiFa')
 			session.cwd(remote_dir)
 			print 'pwd = ' + session.pwd()
 			found_images = []
