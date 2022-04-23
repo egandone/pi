@@ -15,11 +15,33 @@ class Display:
 
     def show_image(self, image):
         image = self.scale_image(image)
-        self.screen.blit(image, (0, 0))
+        image_x, image_y = image.get_size()
+        origin_x, origin_y = 0,0
+        if image_x < self.size[0]:
+            origin_x = int((self.size[0] - image_x)/2)
+        if image_y < self.size[1]:
+            origin_y = int((self.size[1] - image_y)/2)
+        self.screen.fill((0,0,0))
+        self.screen.blit(image, (origin_x, origin_y))
         pygame.display.flip()
         
     def scale_image(self, image):
-        return pygame.transform.scale(pygame.image.load(image), self.size)
+        image = pygame.image.load(image)
+        image_x, image_y = image.get_size()
+        if image_y > image_x:
+            size_y = self.size[1]
+            size_x = (size_y / image_y) * image_x
+            if size_x > self.size[0]:
+                size_x = self.size[0]
+                size_y = (size_x / image_x) * image_y
+        else:
+            size_x = self.size[0]
+            size_y = (size_x / image_x) * image_y
+            if size_y > self.size[1]:
+                size_y = self.size[1]
+                size_x = (size_y / image_y) * image_x
+        size_x, size_y = int(size_x), int(size_y)
+        return pygame.transform.scale(image, (size_x, size_y))
 
     def open(self):
         pygame.display.init()
@@ -75,4 +97,4 @@ if __name__ == "__main__":
             else:
                 display.show_image(infile)
                 # Show each image for 10 seconds
-                time.sleep(10)
+                time.sleep(3)
