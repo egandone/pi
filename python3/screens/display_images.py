@@ -97,4 +97,4 @@ if __name__ == "__main__":
             else:
                 display.show_image(infile)
                 # Show each image for 10 seconds
-                time.sleep(3)
+                time.sleep(5)
