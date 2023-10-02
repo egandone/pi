@@ -61,6 +61,6 @@ def check_files(path, remote_dir):
 		print('Exception connecting to ftp.  Update ignored ' + str(e))
 
 if __name__ == "__main__":
-    path = './s'
+    path = '/home/pi/screens'
     now = datetime.datetime.now()
     check_files(path, now.strftime("%Y-%m-%d"))
