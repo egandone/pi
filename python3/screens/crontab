@@ -1,0 +1,2 @@
+@reboot su pi --command "cvlc --no-osd --loop --aout alsa --alsa-audio-device hw:0,0 /home/pi/screens >> /home/pi/display_images.log" &
+@reboot su pi --command "python3 /home/pi/pi/python3/screens/display_images.py >> /home/pi/refresh_images.log" &
