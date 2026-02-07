@@ -36,7 +36,7 @@ def check_files(path, remote_dir):
 	global found_images
 	try:
 		if (internet_on()):
-			session = ftplib.FTP('ftp.stgeorgestoronto.ca', login.username, login.password)
+			session = ftplib.FTP_TLS(login.server, login.username, login.password)
 			session.cwd(remote_dir)
 			print('pwd = ' + session.pwd())
 			found_images = []
@@ -63,4 +63,4 @@ def check_files(path, remote_dir):
 if __name__ == "__main__":
     path = '/home/pi/screens'
     now = datetime.datetime.now()
-    check_files(path, now.strftime("%Y-%m-%d"))
+    check_files(path, f"/home/{now:%Y-%m-%d}")
